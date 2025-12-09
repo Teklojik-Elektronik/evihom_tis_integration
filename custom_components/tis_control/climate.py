@@ -37,6 +37,17 @@ class TISClimate(ClimateEntity):
     def _stop_polling(A):
         if A._update_task_unsub:logging.info(beta__("U3RvcHBpbmcgc3RhdGUgcG9sbGluZyBmb3Ige19fdmFyMH0=", __var0=A.name));A._update_task_unsub();A._update_task_unsub=_A
     async def _async_poll_for_state(A,now=_A):logging.info(beta__("UG9sbGluZyBmb3Igc3RhdGUgb2Yge19fdmFyMH0=", __var0=A.name));await A.api.protocol.sender.send_packet(A.update_packet)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         A._start_polling()
         @callback
@@ -115,6 +126,17 @@ class TISFloorHeating(ClimateEntity):
     def _stop_polling(A):
         if A._update_task_unsub:logging.info(beta__("U3RvcHBpbmcgc3RhdGUgcG9sbGluZyBmb3Ige19fdmFyMH0=", __var0=A.name));A._update_task_unsub();A._update_task_unsub=_A
     async def _async_poll_for_state(A,now=_A):logging.info(beta__("UG9sbGluZyBmb3Igc3RhdGUgb2Yge19fdmFyMH0=", __var0=A.name));await A.api.protocol.sender.send_packet(A.update_packet)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         A._start_polling()
         @callback

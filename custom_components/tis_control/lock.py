@@ -16,6 +16,17 @@ async def async_setup_entry(hass,entry,async_add_devices):
     B=entry.runtime_data.api;A=await B.get_entities(platform=alpha__("bG9ja19tb2R1bGU="))
     if A is None:logging.error(alpha__("Tm8gbG9jayBtb2R1bGUgZm91bmQgaW4gdGhlIGNvbmZpZ3VyYXRpb24="));return
     else:async_add_devices([TISControlLock(alpha__("QWRtaW4gTG9jaw=="),A[alpha__("cGFzc3dvcmQ=")])])
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
 class TISControlLock(LockEntity):
     def __init__(A,name,password):A._attr_name=name;A.unique_id=beta__("bG9ja197X192YXIwfQ==", __var0=A.name);A._attr_is_locked=_C;A._attr_password=password;A._attr_changed_by=None;A._attr_code_format=alpha__("Lio=");A._attr_is_locking=_A;A._attr_is_unlocking=_A;A._attr_is_opening=_A;A._attr_is_open=_A;A._attr_timeout=60
     @property

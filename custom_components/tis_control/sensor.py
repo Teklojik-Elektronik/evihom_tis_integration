@@ -67,6 +67,17 @@ _LOGGER=logging.getLogger(__name__)
 coordinators={}
 class CoordinatedTemperatureSensor(BaseSensorEntity,SensorEntity):
     def __init__(A,hass,tis_api,gateway,name,device_id,channel_number):C=channel_number;B=device_id;D=get_coordinator(hass,tis_api,B,gateway,_I,C);super().__init__(D,name,B);A._attr_icon=_J;A.name=name;A.device_id=B;A.channel_number=C;A._attr_unique_id=beta__("c2Vuc29yX3tfX3ZhcjB9", __var0=A.name)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         await super().async_added_to_hass()
         @callback
@@ -82,6 +93,17 @@ class CoordinatedTemperatureSensor(BaseSensorEntity,SensorEntity):
     def unit_of_measurement(self):return UnitOfTemperature.CELSIUS
 class CoordinatedLUXSensor(BaseSensorEntity,SensorEntity):
     def __init__(A,hass,tis_api,gateway,name,device_id,channel_number):C=channel_number;B=device_id;D=get_coordinator(hass,tis_api,B,gateway,_D,C);super().__init__(D,name,B);A._attr_icon=alpha__("bWRpOmJyaWdodG5lc3MtNg==");A.name=name;A.device_id=B;A.channel_number=C;A._attr_unique_id=beta__("c2Vuc29yX3tfX3ZhcjB9", __var0=A.name)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         await super().async_added_to_hass()
         @callback
@@ -125,6 +147,17 @@ class CoordinatedHealthSensor(BaseSensorEntity,SensorEntity):
         I=B[alpha__("Y29fc3RhdGU=")];J=B[alpha__("ZWNvMl9zdGF0ZQ==")];K=B[alpha__("dHZvY19zdGF0ZQ==")];L=H(J);M=H(K);N=(C+G+D+L+M)/5
         if I in(1,2):return N
         else:return .0
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         await super().async_added_to_hass()
         @callback
@@ -146,6 +179,17 @@ class CoordinatedAnalogSensor(BaseSensorEntity,SensorEntity):
         D=channel_number;C=device_id;B=settings;E=get_coordinator(hass,tis_api,C,gateway,_E,D);super().__init__(E,name,C);A._attr_icon=_L;A.name=name;A.device_id=C;A.channel_number=D;A.min=min;A.max=max;A._attr_unique_id=beta__("c2Vuc29yX3tfX3ZhcjB9", __var0=A.name)
         if B:B=json.loads(B);A.min_capacity=int(B.get(alpha__("bWluX2NhcGFjaXR5"),0));A.max_capacity=int(B.get(alpha__("bWF4X2NhcGFjaXR5"),100))
         else:raise ValueError(alpha__("bWluIGFuZCBtYXggY2FwYWNpdHkgdmFsdWVzIGFyZSByZXF1aXJlZCBmb3IgYW5hbG9nIHNlbnNvcnM="))
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         await super().async_added_to_hass()
         @callback
@@ -189,6 +233,17 @@ class CPUTemperatureSensor(SensorEntity):
     def name(self):return self._attr_name
 class CoordinatedEnergySensor(BaseSensorEntity,SensorEntity):
     def __init__(A,hass,tis_api,gateway,name,device_id,channel_number,key=_A,sensor_type=_A):E=sensor_type;D=channel_number;C=tis_api;B=device_id;F=get_coordinator(hass,C,B,gateway,E,D);super().__init__(F,name,B);A._attr_icon=_L;A.api=C;A.name=name;A.device_id=B;A.channel_number=D;A._attr_unique_id=beta__("ZW5lcmd5X3tfX3ZhcjB9", __var0=A.name);A._key=key;A.sensor_type=E;A._attr_state_class=alpha__("bWVhc3VyZW1lbnQ=")
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         await super().async_added_to_hass()
         @callback

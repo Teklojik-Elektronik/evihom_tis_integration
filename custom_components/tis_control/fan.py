@@ -49,6 +49,17 @@ class TISCPUFan(FanEntity):
         except Exception as e:
             logging.error(f"Error setting up GPIO: {e}")
             A._pwm=_A;A._attr_available=_B
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         @callback
         async def B(event):

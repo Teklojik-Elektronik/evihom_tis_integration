@@ -30,6 +30,17 @@ async def async_setup_entry(hass,entry,async_add_devices):
 class TISLight(LightEntity):
     def __init__(A,tis_api,gateway,light_name,channel_number,device_id):A.api=tis_api;A.gateway=gateway;A.device_id=device_id;A.channel_number=int(channel_number);A._attr_name=light_name;A._attr_state=_C;A._attr_brightness=_A;A.listener=_A;A.broadcast_channel=255;A._attr_unique_id=beta__("e19fdmFyMH1fe19fdmFyMX0=", __var0=A.name, __var1=A.channel_number);A.setup_light()
     def setup_light(A):A._attr_supported_color_modes={ColorMode.BRIGHTNESS};A._attr_color_mode=ColorMode.BRIGHTNESS;A._attr_supported_features=LightEntityFeature.TRANSITION;A.generate_light_packet=handler.generate_light_control_packet;A.update_packet=handler.generate_control_update_packet(A)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         @callback
         async def B(event):
@@ -74,6 +85,17 @@ class TISLight(LightEntity):
 class TISRGBLight(LightEntity):
     def __init__(A,tis_api,gateway,device_id,r_channel,g_channel,b_channel,light_name):A.api=tis_api;A.gateway=gateway;A.device_id=device_id;A.r_channel=int(r_channel);A.g_channel=int(g_channel);A.b_channel=int(b_channel);A.rgb_value_flags=[0,0,0];A._attr_name=light_name;A._attr_state=_A;A._attr_rgb_color=_A;A._attr_brightness=_A;A.listener=_A;A._attr_unique_id=beta__("e19fdmFyMH1fe19fdmFyMX1fe19fdmFyMn1fe19fdmFyM30=", __var0=A.name, __var1=A.r_channel, __var2=A.g_channel, __var3=A.b_channel);A.default_color=0,0,0;A.setup_light()
     def setup_light(A):A._attr_supported_color_modes={ColorMode.RGB};A._attr_color_mode=ColorMode.RGB;A.generate_rgb_packets=handler.generate_rgb_light_control_packet;A.update_packet=handler.generate_control_update_packet(A)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         @callback
         async def B(event):
@@ -115,6 +137,17 @@ class TISRGBLight(LightEntity):
 class TISRGBWLight(LightEntity):
     def __init__(A,tis_api,gateway,device_id,r_channel,g_channel,b_channel,w_channel,light_name):A.api=tis_api;A.gateway=gateway;A.device_id=device_id;A.r_channel=int(r_channel);A.g_channel=int(g_channel);A.b_channel=int(b_channel);A.w_channel=int(w_channel);A._attr_name=light_name;A._attr_state=_A;A._attr_brightness=_A;A._attr_rgbw_color=_A;A.rgbw_value_flags=[0,0,0,0];A.listener=_A;A._attr_unique_id=beta__("e19fdmFyMH1fe19fdmFyMX1fe19fdmFyMn1fe19fdmFyM31fe19fdmFyNH0=", __var0=A.name, __var1=A.r_channel, __var2=A.g_channel, __var3=A.b_channel, __var4=A.w_channel);A.default_color=0,0,0,0;A.setup_light()
     def setup_light(A):A._attr_supported_color_modes={ColorMode.RGBW};A._attr_color_mode=ColorMode.RGBW;A._attr_supported_features=LightEntityFeature.TRANSITION;A.generate_rgbw_packets=handler.generate_rgbw_light_control_packet;A.update_packet=handler.generate_control_update_packet(A)
+
+    @property
+    def device_info(self):
+        from homeassistant.helpers.entity import DeviceInfo
+        return DeviceInfo(
+            identifiers={("tis_control", str(self.device_id))},
+            name=getattr(self, '_device_name', f"TIS Device {self.device_id}"),
+            manufacturer="TIS Control",
+            model=getattr(self, '_device_type', "Unknown"),
+            sw_version="1.0"
+        )
     async def async_added_to_hass(A):
         @callback
         async def B(event):
