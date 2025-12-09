@@ -1,0 +1,7 @@
+{
+  "name": "TIS Control Integration",
+  "content_in_root": false,
+  "filename": "evihom_tis_integration",
+  "render_readme": true,
+  "domains": ["tis_control"]
+}
