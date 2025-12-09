@@ -31,5 +31,39 @@ async def async_setup_entry(hass,entry):
     except ConnectionError as e:logging.error(alpha__("ZXJyb3IgY29ubmVjdGluZyB0byBUSVMgYXBpICVz"),e);return False
     await hass.config_entries.async_forward_entry_setups(entry,PLATFORMS);return True
 async def async_unload_entry(hass,entry):
-    if(unload_ok:=await hass.config_entries.async_unload_platforms(entry,PLATFORMS)):return unload_ok
-    return False
+    """Unload a config entry and remove all devices."""
+    from homeassistant.helpers import device_registry as dr
+    
+    # Unload platforms
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    
+    if unload_ok:
+        # Remove all devices associated with this integration
+        device_registry = dr.async_get(hass)
+        devices = dr.async_entries_for_config_entry(device_registry, entry.entry_id)
+        
+        for device in devices:
+            device_registry.async_remove_device(device.id)
+            logging.info(f"Removed device: {device.name}")
+    
+    return unload_ok
+
+async def async_remove_entry(hass, entry):
+    """Remove a config entry and clean up all devices."""
+    from homeassistant.helpers import device_registry as dr, entity_registry as er
+    
+    # Remove all devices
+    device_registry = dr.async_get(hass)
+    devices = dr.async_entries_for_config_entry(device_registry, entry.entry_id)
+    
+    for device in devices:
+        device_registry.async_remove_device(device.id)
+        logging.info(f"Removed device on entry removal: {device.name}")
+    
+    # Remove all entities
+    entity_registry = er.async_get(hass)
+    entities = er.async_entries_for_config_entry(entity_registry, entry.entry_id)
+    
+    for entity in entities:
+        entity_registry.async_remove(entity.entity_id)
+        logging.info(f"Removed entity: {entity.entity_id}")
